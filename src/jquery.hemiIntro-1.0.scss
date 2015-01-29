@@ -1,0 +1,16 @@
+.hemi-intro-backdrop {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	top: 0;
+	right: 0;
+	background-color: rgba(#000, 0.7);
+	z-index: 1500;
+}
+.hemi-intro-selected {
+	z-index: 1600;
+	position: relative;
+}
+.hemi-intro-popover {
+	z-index: 1600;
+}
