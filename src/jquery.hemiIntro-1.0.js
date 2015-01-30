@@ -54,10 +54,10 @@
 			onStart: function (plugin) {
 
 			},
-			onBeforeChangeStep: function (plugin) {
+			onBeforeChangeStep: function (plugin, step) {
 
 			},
-			onAfterChangeStep: function (plugin) {
+			onAfterChangeStep: function (plugin, step) {
 
 			},
 			onShowModalDialog: function (plugin, modal) {
@@ -142,7 +142,7 @@
 					currentIndex = index;
 					currentStep = step;
 
-					plugin.options.onBeforeChangeStep(plugin); //CALLBACK
+					plugin.options.onBeforeChangeStep(plugin, step); //CALLBACK
 
 					currentElement.addClass(plugin.options.currentStep.selectedClass);
 					scrollToElement(currentElement, function () {
@@ -175,8 +175,8 @@
 						}).popover('show');
 
 						currentElement.on('shown.bs.popover', function () {
-							plugin.options.onAfterChangeStep(plugin); //CALLBACK
-
+							plugin.options.onAfterChangeStep(plugin, step); //CALLBACK
+							
 							$("." + uniq).on("click", function () {
 								if (plugin.options.steps[index + 1]) {
 									plugin.next();
@@ -193,29 +193,24 @@
 				debugLog(pluginName + ":", "Step not found");
 			}
 		};
-
 		var removeCurrentStep = function () {
 			if (currentElement !== null) {
 				currentElement.removeClass(plugin.options.currentStep.selectedClass);
 				currentElement.popover('destroy');
 			}
 		};
-
 		var onFinish = function () {
 			removeCurrentStep();
 			plugin.backdrop.remove();
 			plugin.options.onComplete(plugin); //CALLBACK
 		};
-
 		var scrollToElement = function (element, callback) {
 			if (typeof callback != "function") {
 				callback = $.noop();
 			}
 			$('html').animate({
-				scrollTop: element.offset().top
-			}, plugin.options.scroll.anmationSpeed, callback);
+				scrollTop: element.offset().top}, plugin.options.scroll.anmationSpeed, callback);
 		};
-
 		var debugLog = function () {
 			if (plugin.options.debug) {
 				console.log.apply(console, arguments);

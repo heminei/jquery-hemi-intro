@@ -47,7 +47,14 @@ Options:
 $(function () {
 	$.hemiIntro({
 		debug: false,
-		steps: [],
+		steps: [
+			{
+				selector: ".step-1",
+				placement: "bottom",
+				content: "Text text text",
+				showButtons: true
+			}
+		],
 		startFromStep: 0,
 		backdrop: {
 			element: $("<div>"),
