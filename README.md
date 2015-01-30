@@ -41,7 +41,7 @@ $(function () {
 });
 ```
 
-Options:
+Default options:
 -----------
 ```javascript
 $(function () {
@@ -52,7 +52,9 @@ $(function () {
 				selector: ".step-1",
 				placement: "bottom",
 				content: "Text text text",
-				showButtons: true
+				showButtons: true,
+				scrollToElement: true,
+				offsetTop: 20
 			}
 		],
 		startFromStep: 0,
