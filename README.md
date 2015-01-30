@@ -8,6 +8,11 @@ Demo:
 
 http://heminei.github.io/jquery-hemi-intro/demo/
 
+Required:
+-----------
+
+Bootstrap (http://getbootstrap.com/)!
+
 How to use:
 -----------
 
