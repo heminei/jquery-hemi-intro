@@ -1,7 +1,7 @@
 jquery-hemi-intro
 =========================
 
-jQuery custom select plugin. Custom responsive design.
+jQuery introduction (intro) plugin step by step.
 
 Demo:
 -----------
