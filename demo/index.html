@@ -77,31 +77,99 @@
 				<p>&copy; Company 2014</p>
 			</footer>
 
+			<!-- Modal -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+						</div>
+						<div class="modal-body">
+							...
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary">Save changes</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
 			<script type="text/javascript">
 				//<!--
 				$(function () {
 					var intro = $.hemiIntro({
-						debug: true,
+						debug: false,
 						steps: [
 							{
-								"selector": ".nav-justified",
-								"placement": "bottom",
-								"content": "Text text text text text text text text text text"
+								selector: ".nav-justified",
+								placement: "bottom",
+								content: "Text text text text text text text text text text",
 							},
 							{
-								"selector": ".jumbotron",
-								"placement": "bottom",
-								"content": "Text2 text2 text2 text2 text2 text2 text2 text2 text2 text2 text2 text2"
+								selector: ".jumbotron",
+								placement: "bottom",
+								content: "Text2 text2 text2 text2 text2 text2 text2 text2 text2 text2 text2 text2"
 							},
 						],
-						init: function () {
-							console.log("init");
+						startFromStep: 0,
+						backdrop: {
+							element: $("<div>"),
+							class: "hemi-intro-backdrop"
 						},
-						onComplete: function() {
+						popover: {
+							template: '<div class="popover hemi-intro-popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
+						},
+						buttons: {
+							holder: {
+								element: $("<div>"),
+								class: "hemi-intro-buttons-holder"
+							},
+							next: {
+								element: $("<button>Next</button>"),
+								class: "btn btn-primary"
+							},
+							finish: {
+								element: $("<button>Finish</button>"),
+								class: "btn btn-primary"
+							}
+						},
+						welcomeDialog: {
+							show: true,
+							selector: "#myModal"
+						},
+						scroll: {
+							anmationSpeed: 500
+						},
+						currentStep: {
+							selectedClass: "hemi-intro-selected"
+						},
+						init: function (plugin) {
+							console.log("init:");
+						},
+						onLoad: function (plugin) {
+							console.log("onLoad:");
+						},
+						onStart: function (plugin) {
+							console.log("onStart:");
+						},
+						onBeforeChangeStep: function () {
+							console.log("onBeforeChangeStep:");
+						},
+						onAfterChangeStep: function () {
+							console.log("onAfterChangeStep:");
+						},
+						onShowModalDialog: function (plugin, modal) {
+							console.log("onShowModalDialog:");
+						},
+						onHideModalDialog: function (plugin, modal) {
+							console.log("onHideModalDialog:");
+						},
+						onComplete: function (plugin) {
 							console.log("onComplete:");
 						}
 					});
-
 					intro.start();
 				});
 				//-->

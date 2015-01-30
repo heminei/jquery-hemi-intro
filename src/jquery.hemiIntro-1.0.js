@@ -19,12 +19,12 @@
 				class: "hemi-intro-backdrop"
 			},
 			popover: {
-				template: '<div class="popover hemi-intro-popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
+				template: '<div class="popover hemi-intro-popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
 			},
 			buttons: {
 				holder: {
 					element: $("<div>"),
-					class: ""
+					class: "hemi-intro-buttons-holder"
 				},
 				next: {
 					element: $("<button>Next</button>"),
@@ -51,10 +51,13 @@
 			onLoad: function (plugin) {
 
 			},
-			onBeforeChangeStep: function () {
+			onStart: function (plugin) {
 
 			},
-			onAfterChangeStep: function () {
+			onBeforeChangeStep: function (plugin) {
+
+			},
+			onAfterChangeStep: function (plugin) {
 
 			},
 			onShowModalDialog: function (plugin, modal) {
@@ -73,30 +76,44 @@
 
 		var currentIndex = plugin.options.startFromStep;
 		var currentElement = null;
+		var currentStep = null;
 
 		plugin.backdrop = plugin.options.backdrop.element.clone().addClass(plugin.options.backdrop.class);
-		plugin.backdrop.appendTo("body");
 
 		plugin.options.onLoad(plugin); //CALLBACK
 
 		plugin.start = function () {
+			plugin.options.onStart(plugin); //CALLBACK
+
 			if (plugin.options.welcomeDialog.show) {
 				var modal = $(plugin.options.welcomeDialog.selector);
-				modal.modal("show");
-				modal.on('show.bs.modal', function (e) {
-					plugin.options.onShowModalDialog(plugin, modal); //CALLBACK
-				});
-				modal.on('hidden.bs.modal', function (e) {
-					plugin.options.onHideModalDialog(plugin, modal); //CALLBACK
+				if (modal.length > 0) {
+					modal.on('show.bs.modal', function (e) {
+						plugin.options.onShowModalDialog(plugin, modal); //CALLBACK
+					});
+					modal.on('hidden.bs.modal', function (e) {
+						plugin.options.onHideModalDialog(plugin, modal); //CALLBACK
+						plugin.backdrop.appendTo("body");
+						goToStep(currentIndex);
+					});
+					modal.modal("show");
+				} else {
+					debugLog(pluginName + ":", "Modal '" + plugin.options.welcomeDialog.selector + "' not found");
+					plugin.backdrop.appendTo("body");
 					goToStep(currentIndex);
-				});
+				}
 			} else {
+				plugin.backdrop.appendTo("body");
 				goToStep(currentIndex);
 			}
 		};
 
 		plugin.next = function () {
-			goToStep(currentIndex + 1);
+			if (plugin.options.steps[currentIndex + 1]) {
+				goToStep(currentIndex + 1);
+			} else {
+				plugin.finish();
+			}
 		};
 
 		plugin.prev = function () {
@@ -118,9 +135,13 @@
 			if (plugin.options.steps[index]) {
 				var step = plugin.options.steps[index];
 
-				currentElement = $(step.selector);
-				if (currentElement.length > 0) {
+				if ($(step.selector).length > 0) {
+					removeCurrentStep();
+
+					currentElement = $(step.selector);
 					currentIndex = index;
+					currentStep = step;
+
 					plugin.options.onBeforeChangeStep(plugin); //CALLBACK
 
 					currentElement.addClass(plugin.options.currentStep.selectedClass);
@@ -139,7 +160,11 @@
 							buttonsHolder.append(button);
 						}
 
-						var content = $("<div>").append(step.content).append(buttonsHolder.get(0).outerHTML);
+						var content = $("<div>").append(step.content);
+
+						if (step.showButtons !== false) {
+							content.append(buttonsHolder.get(0).outerHTML);
+						}
 
 						currentElement.popover({
 							content: content.get(0).outerHTML,
@@ -151,10 +176,9 @@
 
 						currentElement.on('shown.bs.popover', function () {
 							plugin.options.onAfterChangeStep(plugin); //CALLBACK
+
 							$("." + uniq).on("click", function () {
 								if (plugin.options.steps[index + 1]) {
-									currentElement.removeClass(plugin.options.currentStep.selectedClass);
-									currentElement.popover('destroy');
 									plugin.next();
 								} else {
 									plugin.finish();
@@ -170,10 +194,15 @@
 			}
 		};
 
+		var removeCurrentStep = function () {
+			if (currentElement !== null) {
+				currentElement.removeClass(plugin.options.currentStep.selectedClass);
+				currentElement.popover('destroy');
+			}
+		};
 
 		var onFinish = function () {
-			currentElement.removeClass(plugin.options.currentStep.selectedClass);
-			currentElement.popover('destroy');
+			removeCurrentStep();
 			plugin.backdrop.remove();
 			plugin.options.onComplete(plugin); //CALLBACK
 		};
@@ -191,7 +220,7 @@
 			if (plugin.options.debug) {
 				console.log.apply(console, arguments);
 			}
-		}
+		};
 
 		return plugin;
 	};
