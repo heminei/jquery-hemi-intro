@@ -2,7 +2,7 @@
  * author: Heminei
  * site: https://github.com/heminei/jquery-hemi-intro
  * email: heminei@heminei.com
- * v1.0
+ * v1.1
  */
 (function ($) {
 	var pluginName = "hemiIntro";
@@ -213,9 +213,15 @@
 				if (currentStep.offsetTop) {
 					offsetTop = currentStep.offsetTop;
 				}
-				$('html').animate({
+				var called = false;
+				$('html, body').animate({
 					scrollTop: currentElement.offset().top - offsetTop
-				}, plugin.options.scroll.anmationSpeed, callback);
+				}, plugin.options.scroll.anmationSpeed, function () {
+					if (called === false) {
+						callback();
+						called = true;
+					}
+				});
 			} else {
 				callback();
 			}
