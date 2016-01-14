@@ -2,7 +2,7 @@
  * author: Heminei
  * site: https://github.com/heminei/jquery-hemi-intro
  * email: heminei@heminei.com
- * v1.1
+ * v1.2
  */
 (function ($) {
 	var pluginName = "hemiIntro";
@@ -127,8 +127,13 @@
 		plugin.finish = function () {
 			onFinish();
 		};
+
 		plugin.goToStep = function (index) {
 			goToStep(index);
+		};
+
+		plugin.getCurrentStep = function () {
+			return currentStep;
 		};
 
 		var goToStep = function (index) {
