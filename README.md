@@ -17,8 +17,8 @@ How to use:
 -----------
 
 ```html
-<link href="/src/jquery.hemiIntro-1.0.css" rel="stylesheet" type="text/css"/>
-<script src="/src/jquery.hemiIntro-1.0.js" type="text/javascript"></script>
+<link href="/src/jquery.hemiIntro.css" rel="stylesheet" type="text/css"/>
+<script src="/src/jquery.hemiIntro.js" type="text/javascript"></script>
 ```
 
 ```javascript
@@ -115,4 +115,17 @@ $(function () {
 		}
 	});
 });
+```
+
+Methods:
+-----------
+```javascript
+	var intro = $.hemiIntro();
+
+	intro.start();
+	intro.next();
+	intro.prev();
+	intro.finish();
+	intro.goToStep(1);
+	intro.getCurrentStep();
 ```
