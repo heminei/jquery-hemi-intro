@@ -120,6 +120,7 @@ $(function () {
 Methods:
 -----------
 ```javascript
+$(function () {
 	var intro = $.hemiIntro();
 
 	intro.start();
@@ -128,4 +129,5 @@ Methods:
 	intro.finish();
 	intro.goToStep(1);
 	intro.getCurrentStep();
+});
 ```
