@@ -40,7 +40,7 @@
 				selector: null
 			},
 			scroll: {
-				anmationSpeed: 500
+				animationSpeed: 500
 			},
 			currentStep: {
 				selectedClass: "hemi-intro-selected"
@@ -221,7 +221,7 @@
 				var called = false;
 				$('html, body').animate({
 					scrollTop: currentElement.offset().top - offsetTop
-				}, plugin.options.scroll.anmationSpeed, function () {
+				}, plugin.options.scroll.animationSpeed, function () {
 					if (called === false) {
 						callback();
 						called = true;
