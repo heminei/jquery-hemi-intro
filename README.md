@@ -84,7 +84,7 @@ $(function () {
 			selector: null
 		},
 		scroll: {
-			anmationSpeed: 500
+			animationSpeed: 500
 		},
 		currentStep: {
 			selectedClass: "hemi-intro-selected"
