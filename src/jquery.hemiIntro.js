@@ -2,7 +2,7 @@
  * author: Heminei
  * site: https://github.com/heminei/jquery-hemi-intro
  * email: heminei@heminei.com
- * v1.2
+ * v1.2.2
  */
 (function ($) {
 	var pluginName = "hemiIntro";
@@ -27,11 +27,11 @@
 					class: "hemi-intro-buttons-holder"
 				},
 				next: {
-					element: $("<button>Next</button>"),
+					element: $("<button type=\"button\">Next</button>"),
 					class: "btn btn-primary"
 				},
 				finish: {
-					element: $("<button>Finish</button>"),
+					element: $("<button type=\"button\">Finish</button>"),
 					class: "btn btn-primary"
 				}
 			},
@@ -127,7 +127,7 @@
 		plugin.finish = function () {
 			onFinish();
 		};
-		
+
 		plugin.goToStep = function (index) {
 			goToStep(index);
 		};
