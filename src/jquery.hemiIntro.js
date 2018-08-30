@@ -2,7 +2,6 @@
  * author: Heminei
  * site: https://github.com/heminei/jquery-hemi-intro
  * email: heminei@heminei.com
- * v1.2.2
  */
 (function ($) {
 	var pluginName = "hemiIntro";

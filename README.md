@@ -13,6 +13,13 @@ Required:
 
 Bootstrap (http://getbootstrap.com/)!
 
+Installation:
+-----------
+
+```bash
+npm install jquery-hemi-intro
+```
+
 How to use:
 -----------
 

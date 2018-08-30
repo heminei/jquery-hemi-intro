@@ -1,0 +1,21 @@
+{
+    "name": "jquery-hemi-intro",
+    "version": "1.2.2",
+    "description": "jQuery introduction (intro) plugin step by step.",
+    "keywords": [
+        "intro",
+        "jquery",
+        "bootstrap"
+    ],
+    "main": "src/jquery.hemiIntro.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/heminei/jquery-hemi-intro.git"
+    },
+    "author": "Martin Bratvanov <heminei@heminei.com>",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/heminei/jquery-hemi-intro/issues"
+    },
+    "homepage": "https://github.com/heminei/jquery-hemi-intro#readme"
+}
